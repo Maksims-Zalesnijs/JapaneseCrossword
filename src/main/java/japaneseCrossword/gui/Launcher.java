@@ -27,12 +27,11 @@ public class Launcher implements ActionListener {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-//        frame.setSize(200,200);
         frame.setVisible(true);
 
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2,2));
-        buttonPanel.setPreferredSize(new Dimension(400,200));
+        buttonPanel.setPreferredSize(new Dimension(600,200));
 
         startButton = new LauncherButton();
         startButton.addActionListener(this);
@@ -87,6 +86,13 @@ public class Launcher implements ActionListener {
         }
 
         if(e.getSource() == selectFileButton){
+            JFileChooser fileChooser = new JFileChooser();
+            int response;
+            response = fileChooser.showOpenDialog(null);
+            if(response == JFileChooser.APPROVE_OPTION){
+                filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                label.setText(filePath);
+            }
 
         }
 

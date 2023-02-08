@@ -1,6 +1,7 @@
 package japaneseCrossword.gui;
 
 import japaneseCrossword.DemoLauncher;
+import japaneseCrossword.GameLauncher;
 import japaneseCrossword.gui.customButtons.LauncherButton;
 
 import javax.swing.*;
@@ -18,7 +19,6 @@ public class Launcher implements ActionListener {
     private JButton selectFileButton;
     private JButton runDemoButton;
     private JButton exitButton;
-    private DemoLauncher demoLauncher;
     private String filePath;
 
 
@@ -71,8 +71,6 @@ public class Launcher implements ActionListener {
         frame.pack();
         frame.revalidate();
 
-        demoLauncher = new DemoLauncher();
-
         filePath = null;
 
     }
@@ -80,7 +78,14 @@ public class Launcher implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if(e.getSource() == startButton){
+            GameLauncher gameLauncher = new GameLauncher(filePath);
+            gameLauncher.launchGame();
+            frame.dispose();
+        }
+
         if(e.getSource() == runDemoButton){
+            DemoLauncher demoLauncher = new DemoLauncher();
             demoLauncher.runDemo();
             frame.dispose();
         }

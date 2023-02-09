@@ -21,19 +21,19 @@ public class FieldGenerator {
 
     //Main method for testing
     //
-    public static void main(String[] args) {
-        BufferedImage image = ImageRead.readImage("C:\\Users\\Max\\Pictures\\from_java\\mushroom.png");
-        Color[][] colors = ImageTransformer.imageToColorArray(image);
-        int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
-
-
-
-        pixels = generateField(pixels);
-        ColorPrinter.printColor(colors);
-
-        GameBoard gameBoard = new GameBoard(pixels);
-
-    }
+//    public static void main(String[] args) {
+//        BufferedImage image = ImageRead.readImage("C:\\Users\\Max\\Pictures\\from_java\\mushroom.png");
+//        Color[][] colors = ImageTransformer.imageToColorArray(image);
+//        int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
+//
+//
+//
+//        pixels = generateField(pixels);
+//        ColorPrinter.printColor(colors);
+//
+//        GameBoard gameBoard = new GameBoard(pixels);
+//
+//    }
     //
     //End of Main
 

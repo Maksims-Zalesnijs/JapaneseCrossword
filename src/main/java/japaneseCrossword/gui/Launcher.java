@@ -98,12 +98,11 @@ public class Launcher implements ActionListener {
                 filePath = fileChooser.getSelectedFile().getAbsolutePath();
                 label.setText(filePath);
             }
-
         }
 
         if(e.getSource() == exitButton){
             frame.dispose();
         }
-
     }
+
 }

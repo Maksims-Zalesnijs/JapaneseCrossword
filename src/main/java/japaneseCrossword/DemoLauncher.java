@@ -7,8 +7,8 @@ public class DemoLauncher {
 
     public void runDemo(){
         DemoPicture demoPicture = new DemoPicture();
-        int[][] pixels = FieldGenerator.generateField(demoPicture.getDemo());
-        GameBoard gameBoard = new GameBoard(pixels);
+        int[][] demoField = FieldGenerator.generateField(demoPicture.getDemo());
+        GameBoard gameBoard = new GameBoard(demoField);
     }
 
 }

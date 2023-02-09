@@ -1,12 +1,14 @@
 package japaneseCrossword;
 
 import japaneseCrossword.gui.GameBoard;
+import japaneseCrossword.logic.FieldGenerator;
 
 public class DemoLauncher {
 
     public void runDemo(){
         DemoPicture demoPicture = new DemoPicture();
-        GameBoard gameBoard = new GameBoard(demoPicture.getDemo());
+        int[][] pixels = FieldGenerator.generateField(demoPicture.getDemo());
+        GameBoard gameBoard = new GameBoard(pixels);
     }
 
 }

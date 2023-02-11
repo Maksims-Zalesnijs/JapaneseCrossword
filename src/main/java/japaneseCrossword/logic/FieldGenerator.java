@@ -1,19 +1,10 @@
 package japaneseCrossword.logic;
 
-import japaneseCrossword.gui.GameBoard;
-import japaneseCrossword.imageOperations.ColorsToInt;
-import japaneseCrossword.imageOperations.ImageRead;
-import japaneseCrossword.imageOperations.ImageTransformer;
-import japaneseCrossword.imageOperations.forTesting.ColorPrinter;
-import japaneseCrossword.imageOperations.forTesting.LinePrinter;
-import japaneseCrossword.imageOperations.forTesting.PixelPrinter;
 import japaneseCrossword.logic.fieldGeneratorTools.FillButtonPart;
 import japaneseCrossword.logic.fieldGeneratorTools.FillDefault;
 import japaneseCrossword.logic.fieldGeneratorTools.FillNumberPart;
 import japaneseCrossword.logic.fieldGeneratorTools.MostLinesInRow;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class FieldGenerator {

@@ -3,6 +3,7 @@ package japaneseCrossword.gui;
 import japaneseCrossword.gui.actions.BorderGenerator;
 import japaneseCrossword.gui.customButtons.CheckButton;
 import japaneseCrossword.gui.customButtons.GridButton;
+import japaneseCrossword.gui.customLabels.TextLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,8 @@ public class GameBoard implements ActionListener {
 
     private JFrame frame;
     private JPanel buttonPanel;
-    private JPanel lowerPanel;
+    private JPanel lowerPanel, upperPanel;
+    private JLabel sizeLabel;
     private GridButton[][] buttons;
     private JButton checkButton;
 
@@ -47,9 +49,14 @@ public class GameBoard implements ActionListener {
 
         lowerPanel = new JPanel();
         lowerPanel.setLayout(new GridLayout(1,2));
+        lowerPanel.setPreferredSize(new Dimension(width*27, 50));
+        upperPanel = new JPanel();
+        upperPanel.setLayout(new GridLayout());
+        upperPanel.setPreferredSize(new Dimension(width* 27, 50));
+
+        sizeLabel = new TextLabel("Size: " + (width-startXCoord) + " x " + (height-startYCoord));
 
         checkButton = new CheckButton("Check Field");
-        checkButton.setSize(width*27, 120);
         checkButton.addActionListener(this);
 
         buttons = new GridButton[height][width];
@@ -82,7 +89,9 @@ public class GameBoard implements ActionListener {
         }
 
         lowerPanel.add(checkButton);
+        upperPanel.add(sizeLabel);
 
+        frame.add(upperPanel, BorderLayout.NORTH);
         frame.add(buttonPanel, BorderLayout.CENTER);
 //        frame.add(checkButton, BorderLayout.SOUTH);
         frame.add(lowerPanel, BorderLayout.SOUTH);

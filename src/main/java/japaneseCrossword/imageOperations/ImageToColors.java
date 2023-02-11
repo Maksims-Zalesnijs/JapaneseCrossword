@@ -3,7 +3,7 @@ package japaneseCrossword.imageOperations;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ImageTransformer {
+public class ImageToColors {
 
     public static Color[][] imageToColorArray(BufferedImage image){
 

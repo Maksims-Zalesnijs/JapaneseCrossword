@@ -2,9 +2,8 @@ package japaneseCrossword;
 
 import imageEditor.ImageReader;
 import japaneseCrossword.gui.GameBoard;
-import japaneseCrossword.gui.Launcher;
 import japaneseCrossword.imageOperations.ColorsToInt;
-import japaneseCrossword.imageOperations.ImageTransformer;
+import japaneseCrossword.imageOperations.ImageToColors;
 import japaneseCrossword.imageOperations.RemoveWhiteLines;
 import japaneseCrossword.logic.FieldGenerator;
 
@@ -23,7 +22,7 @@ public class GameLauncher {
     public void launchGame(){
 
         BufferedImage image = ImageReader.readImage(filePath);
-        Color[][] colors = ImageTransformer.imageToColorArray(image);
+        Color[][] colors = ImageToColors.imageToColorArray(image);
         int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
 
         pixels = RemoveWhiteLines.removeWhiteLines(pixels);

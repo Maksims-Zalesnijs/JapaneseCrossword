@@ -4,13 +4,10 @@ import imageEditor.ImageReader;
 import japaneseCrossword.gui.GameBoard;
 import japaneseCrossword.gui.Launcher;
 import japaneseCrossword.imageOperations.ColorsToInt;
-import japaneseCrossword.imageOperations.ImageRead;
-import japaneseCrossword.imageOperations.ImageTransformer;
+import japaneseCrossword.imageOperations.ImageToColors;
 import japaneseCrossword.imageOperations.RemoveWhiteLines;
-import japaneseCrossword.imageOperations.forTesting.ColorPrinter;
 import japaneseCrossword.logic.FieldGenerator;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -23,14 +20,14 @@ public class JapaneseCrossword {
     public JapaneseCrossword(){
 
         bi = ImageReader.readImage("C:\\Users\\Max\\Pictures\\from_java\\houses.png");
-        colors = ImageTransformer.imageToColorArray(bi);
+        colors = ImageToColors.imageToColorArray(bi);
         GameBoard gameBoard;
     }
 
     public void runGame(){
 
         BufferedImage image = bi;
-        Color[][] colors = ImageTransformer.imageToColorArray(image);
+        Color[][] colors = ImageToColors.imageToColorArray(image);
         int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
 
         pixels = RemoveWhiteLines.removeWhiteLines(pixels);

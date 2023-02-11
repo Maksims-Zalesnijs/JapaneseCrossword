@@ -1,4 +1,4 @@
-package imageEditor;
+package japaneseCrossword.imageOperations.forTesting;
 
 import javax.swing.*;
 import java.awt.*;

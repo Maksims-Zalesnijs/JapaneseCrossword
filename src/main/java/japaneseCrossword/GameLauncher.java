@@ -15,8 +15,8 @@ public class GameLauncher {
     private BufferedImage image;
     private String filePath;
 
-    public GameLauncher(String filePath){
-        this.filePath = filePath;
+    public GameLauncher(BufferedImage image){
+        this.image = image;
     }
 
     public boolean launchGame(){
@@ -24,7 +24,7 @@ public class GameLauncher {
         boolean isSuccess = true;
 
         try {
-            BufferedImage image = ImageReader.readImage(filePath);
+//            BufferedImage image = ImageReader.readImage(filePath);
             Color[][] colors = ImageToColors.imageToColorArray(image);
             int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
 

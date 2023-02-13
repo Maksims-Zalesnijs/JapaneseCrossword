@@ -1,5 +1,6 @@
 package japaneseCrossword.gui;
 
+import imageEditor.ImageReader;
 import japaneseCrossword.DemoLauncher;
 import japaneseCrossword.GameLauncher;
 import japaneseCrossword.gui.customButtons.LauncherButton;
@@ -9,6 +10,7 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class Launcher implements ActionListener {
 
@@ -17,9 +19,13 @@ public class Launcher implements ActionListener {
     private JLabel label, sizeLabel;
     private JButton startButton, selectFileButton, runDemoButton, exitButton, plusButton, minusButton;
     private String filePath;
+    private int currentHeight, pictureWidth, pictureHeight;
+    private BufferedImage image;
 
 
     public Launcher(){
+
+        currentHeight = 0;
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,10 +58,12 @@ public class Launcher implements ActionListener {
         plusButton = new LauncherButton();
         plusButton.addActionListener(this);
         plusButton.setText("+");
+        plusButton.setEnabled(false);
 
         minusButton = new LauncherButton();
         minusButton.addActionListener(this);
         minusButton.setText("-");
+        minusButton.setEnabled(false);
 
         label = new JLabel();
         label.setPreferredSize(new Dimension(400,100));
@@ -67,14 +75,13 @@ public class Launcher implements ActionListener {
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
 
-
         sizeLabel = new JLabel();
         sizeLabel.setOpaque(true);
         sizeLabel.setFont(new Font("Georgia", Font.BOLD, 25));
         sizeLabel.setForeground(Color.LIGHT_GRAY);
         sizeLabel.setBackground(Color.DARK_GRAY);
         sizeLabel.setBorder(new MatteBorder(2,2,0,0, Color.LIGHT_GRAY));
-        sizeLabel.setText("Height: " + 1);
+        sizeLabel.setText("Height: " + currentHeight);
         sizeLabel.setVerticalAlignment(JLabel.CENTER);
         sizeLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -97,6 +104,7 @@ public class Launcher implements ActionListener {
 
         filePath = null;
 
+
     }
 
     @Override
@@ -104,7 +112,7 @@ public class Launcher implements ActionListener {
 
         if(e.getSource() == startButton){
             boolean isSuccess = true;
-            GameLauncher gameLauncher = new GameLauncher(filePath);
+            GameLauncher gameLauncher = new GameLauncher(image);
             isSuccess = gameLauncher.launchGame();
             if(isSuccess){
                 frame.dispose();
@@ -123,13 +131,51 @@ public class Launcher implements ActionListener {
             response = fileChooser.showOpenDialog(null);
             if(response == JFileChooser.APPROVE_OPTION){
                 filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                label.setText(filePath);
             }
+            try{
+                image = ImageReader.readImage(filePath);
+                pictureWidth = image.getWidth();
+                pictureHeight = image.getHeight();
+                label.setText("(" + pictureWidth + "x" + pictureHeight + ") " + filePath);
+
+                if(image.getHeight() < 31){
+
+                    currentHeight = pictureHeight;
+                    plusButton.setEnabled(false);
+                    minusButton.setEnabled(false);
+
+                } else {
+
+                    currentHeight = 15;
+                    sizeLabel.setText("Height: " + currentHeight);
+                    plusButton.setEnabled(true);
+                    minusButton.setEnabled(true);
+
+                }
+            } catch (Exception ex){
+
+            }
+
         }
 
         if(e.getSource() == exitButton){
             frame.dispose();
         }
+
+        if(e.getSource() == plusButton){
+            if(currentHeight > 4 && currentHeight < 30){
+                currentHeight++;
+                sizeLabel.setText("Height: " + currentHeight);
+            }
+        }
+
+        if(e.getSource() == minusButton){
+            if(currentHeight > 5){
+                currentHeight--;
+                sizeLabel.setText("Height: " + currentHeight);
+            }
+        }
+
     }
 
 }

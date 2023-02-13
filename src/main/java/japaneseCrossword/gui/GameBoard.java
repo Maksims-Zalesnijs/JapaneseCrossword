@@ -26,6 +26,7 @@ public class GameBoard implements ActionListener {
     private int height;
     private boolean isWin;
     private int[][] solution;
+    private int answerTimesPressed;
 
     public GameBoard(int[][] pixels){
         solution = pixels;
@@ -34,6 +35,7 @@ public class GameBoard implements ActionListener {
         startXCoord = findXStartCoord(solution);
         startYCoord = findYStartCoord(solution);
         isWin = false;
+        answerTimesPressed = 3;
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +60,7 @@ public class GameBoard implements ActionListener {
 
         checkButton = new menuButton("Check");
         checkButton.addActionListener(this);
-        answerButton = new menuButton("Answer");
+        answerButton = new menuButton("Answer ("+ answerTimesPressed + ")");
         answerButton.addActionListener(this);
         resetButton = new menuButton("Reset");
         resetButton.addActionListener(this);
@@ -163,6 +165,34 @@ public class GameBoard implements ActionListener {
                 checkButton.setForeground(new Color(50, 100, 60));
             }
             System.out.println(isWin);
+        }
+
+        if(e.getSource() == answerButton){
+
+            if(answerTimesPressed > 1){
+                answerTimesPressed--;
+                answerButton.setText("Answer ("+ answerTimesPressed + ")");
+            } else {
+                answerButton.setText("Answer");
+                for (int y = startYCoord; y < buttons.length; y++) {
+                    for (int x = startXCoord; x < buttons[0].length; x++) {
+
+                        buttons[y][x].setButtonState(solution[y][x]);
+
+                    }
+                }
+            }
+
+        }
+
+        if(e.getSource() == resetButton){
+            frame.dispose();
+            new GameBoard(solution);
+        }
+
+        if(e.getSource() == exitButton){
+            frame.dispose();
+            new Launcher();
         }
 
         for(int i = startYCoord; i < buttons.length; i++){

@@ -9,17 +9,17 @@ public class ImageSizeCorrector {
     public static Color[][] resizeImage(Color[][] image, int heightInCells){
 
         Color[][] resizedImage;
-        int cellSide;
+        int cellSize;
         int widthInCells;
         int currentHeight = image.length;
         int currentWidth = image[0].length;
         int xStartCoord;
         int yStartCoord;
 
-        cellSide = (int) Math.floor(currentHeight/heightInCells);
-        int newHeight = heightInCells * cellSide;
-        widthInCells = (int) Math.floor(currentWidth/cellSide);
-        int newWidth = widthInCells * cellSide;
+        cellSize = (int) Math.floor(currentHeight/heightInCells);
+        int newHeight = heightInCells * cellSize;
+        widthInCells = (int) Math.floor(currentWidth/cellSize);
+        int newWidth = widthInCells * cellSize;
 
         yStartCoord = (int) Math.floor((currentHeight - newHeight) /2);
         xStartCoord = (int) Math.floor((currentWidth - newWidth) /2);

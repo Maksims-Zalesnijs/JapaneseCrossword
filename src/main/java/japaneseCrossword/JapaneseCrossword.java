@@ -19,9 +19,8 @@ public class JapaneseCrossword {
 
     public JapaneseCrossword(){
 
-        bi = ImageReader.readImage("C:\\Users\\Max\\Pictures\\from_java\\houses.png");
-        colors = ImageToColors.imageToColorArray(bi);
-        GameBoard gameBoard;
+        new Launcher();
+
     }
 
     public void runGame(){
@@ -33,9 +32,8 @@ public class JapaneseCrossword {
         pixels = RemoveWhiteLines.removeWhiteLines(pixels);
         pixels = FieldGenerator.generateField(pixels);
 
-//        DemoPicture d = new DemoPicture();
-        Launcher launcher = new Launcher();
-//        gameBoard = new GameBoard(pixels);
+        new GameBoard(pixels);
+
     }
 
     public void runDemo(){

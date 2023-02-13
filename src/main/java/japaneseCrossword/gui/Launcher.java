@@ -13,12 +13,9 @@ import java.awt.event.ActionListener;
 public class Launcher implements ActionListener {
 
     private JFrame frame;
-    private JPanel buttonPanel;
-    private JLabel label;
-    private JButton startButton;
-    private JButton selectFileButton;
-    private JButton runDemoButton;
-    private JButton exitButton;
+    private JPanel buttonPanel, plusMinusPanel;
+    private JLabel label, sizeLabel;
+    private JButton startButton, selectFileButton, runDemoButton, exitButton, plusButton, minusButton;
     private String filePath;
 
 
@@ -30,8 +27,11 @@ public class Launcher implements ActionListener {
         frame.setVisible(true);
 
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2,2));
+        buttonPanel.setLayout(new GridLayout(2,3));
         buttonPanel.setPreferredSize(new Dimension(600,200));
+
+        plusMinusPanel = new JPanel();
+        plusMinusPanel.setLayout(new GridLayout(1,2));
 
         startButton = new LauncherButton();
         startButton.addActionListener(this);
@@ -49,6 +49,14 @@ public class Launcher implements ActionListener {
         exitButton.addActionListener(this);
         exitButton.setText("Exit");
 
+        plusButton = new LauncherButton();
+        plusButton.addActionListener(this);
+        plusButton.setText("+");
+
+        minusButton = new LauncherButton();
+        minusButton.addActionListener(this);
+        minusButton.setText("-");
+
         label = new JLabel();
         label.setPreferredSize(new Dimension(400,100));
         label.setFont(new Font("Georgia", Font.PLAIN, 20));
@@ -59,10 +67,26 @@ public class Launcher implements ActionListener {
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
 
+
+        sizeLabel = new JLabel();
+        sizeLabel.setOpaque(true);
+        sizeLabel.setFont(new Font("Georgia", Font.BOLD, 25));
+        sizeLabel.setForeground(Color.LIGHT_GRAY);
+        sizeLabel.setBackground(Color.DARK_GRAY);
+        sizeLabel.setBorder(new MatteBorder(2,2,0,0, Color.LIGHT_GRAY));
+        sizeLabel.setText("Height: " + 1);
+        sizeLabel.setVerticalAlignment(JLabel.CENTER);
+        sizeLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        plusMinusPanel.add(minusButton);
+        plusMinusPanel.add(plusButton);
+
         buttonPanel.add(startButton);
         buttonPanel.add(selectFileButton);
+        buttonPanel.add(sizeLabel);
         buttonPanel.add(runDemoButton);
         buttonPanel.add(exitButton);
+        buttonPanel.add(plusMinusPanel);
 //        buttonPanel.setVisible(true);
 
         frame.add(label, BorderLayout.NORTH);
@@ -79,9 +103,12 @@ public class Launcher implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == startButton){
+            boolean isSuccess = true;
             GameLauncher gameLauncher = new GameLauncher(filePath);
-            gameLauncher.launchGame();
-            frame.dispose();
+            isSuccess = gameLauncher.launchGame();
+            if(isSuccess){
+                frame.dispose();
+            }
         }
 
         if(e.getSource() == runDemoButton){

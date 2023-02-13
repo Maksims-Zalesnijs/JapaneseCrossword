@@ -1,7 +1,7 @@
 package japaneseCrossword.gui;
 
 import japaneseCrossword.gui.actions.BorderGenerator;
-import japaneseCrossword.gui.customButtons.CheckButton;
+import japaneseCrossword.gui.customButtons.menuButton;
 import japaneseCrossword.gui.customButtons.GridButton;
 import japaneseCrossword.gui.customLabels.TextLabel;
 
@@ -17,7 +17,7 @@ public class GameBoard implements ActionListener {
     private JPanel lowerPanel, upperPanel;
     private JLabel sizeLabel;
     private GridButton[][] buttons;
-    private JButton checkButton;
+    private JButton checkButton, resetButton, exitButton, answerButton;
 
 
     private int startXCoord;
@@ -48,16 +48,22 @@ public class GameBoard implements ActionListener {
         buttonPanel.setVisible(true);
 
         lowerPanel = new JPanel();
-        lowerPanel.setLayout(new GridLayout(1,2));
-        lowerPanel.setPreferredSize(new Dimension(width*27, 50));
+        lowerPanel.setLayout(new GridLayout(2,2));
+        lowerPanel.setPreferredSize(new Dimension(width*27, 80));
         upperPanel = new JPanel();
         upperPanel.setLayout(new GridLayout());
         upperPanel.setPreferredSize(new Dimension(width* 27, 50));
 
         sizeLabel = new TextLabel("Size: " + (width-startXCoord) + " x " + (height-startYCoord));
 
-        checkButton = new CheckButton("Check Field");
+        checkButton = new menuButton("Check");
         checkButton.addActionListener(this);
+        answerButton = new menuButton("Answer");
+        answerButton.addActionListener(this);
+        resetButton = new menuButton("Reset");
+        resetButton.addActionListener(this);
+        exitButton = new menuButton("Exit");
+        exitButton.addActionListener(this);
 
         buttons = new GridButton[height][width];
 
@@ -89,6 +95,9 @@ public class GameBoard implements ActionListener {
         }
 
         lowerPanel.add(checkButton);
+        lowerPanel.add(answerButton);
+        lowerPanel.add(resetButton);
+        lowerPanel.add(exitButton);
         upperPanel.add(sizeLabel);
 
         frame.add(upperPanel, BorderLayout.NORTH);

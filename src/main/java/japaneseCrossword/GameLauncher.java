@@ -19,17 +19,24 @@ public class GameLauncher {
         this.filePath = filePath;
     }
 
-    public void launchGame(){
+    public boolean launchGame(){
 
-        BufferedImage image = ImageReader.readImage(filePath);
-        Color[][] colors = ImageToColors.imageToColorArray(image);
-        int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
+        boolean isSuccess = true;
 
-        pixels = RemoveWhiteLines.removeWhiteLines(pixels);
-        pixels = FieldGenerator.generateField(pixels);
+        try {
+            BufferedImage image = ImageReader.readImage(filePath);
+            Color[][] colors = ImageToColors.imageToColorArray(image);
+            int[][] pixels = ColorsToInt.colorsToZeroOne(colors);
 
-        GameBoard gameBoard = new GameBoard(pixels);
+            pixels = RemoveWhiteLines.removeWhiteLines(pixels);
+            pixels = FieldGenerator.generateField(pixels);
 
+            GameBoard gameBoard = new GameBoard(pixels);
+        } catch (Exception ex){
+            isSuccess = false;
+        }
+
+        return isSuccess;
     }
 
 }

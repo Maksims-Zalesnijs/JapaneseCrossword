@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class Main {
     public static void main(String[] args) {
 
-        int heightInCells = 25;
+        int heightInCells = 30;
 
         BufferedImage image = ImageRead.readImage("C:\\Users\\Max\\Pictures\\from_java\\thumbs_up.png");
         BufferedImage imageBW = ColorsToGreyConverter.imageToBW(image);
@@ -19,7 +19,8 @@ public class Main {
         Color[][] colors = ImageToColors.imageToColorArray(imageBW);
         Color[][] resizedImage = ImageSizeCorrector.resizeImage(colors, heightInCells);
         Color[][] greyCells = ImageToCells.imageToCells(resizedImage, resizedImage.length/heightInCells);
-        imageBW = ColorsToImage.transformColorsToImage(greyCells);
+        Color[][] cellsBW = GreyCellsToBW.greyCellsToBW(greyCells);
+        imageBW = ColorsToImage.transformColorsToImage(cellsBW);
 
 
         JFrame frame = ImageViewer.showImage(imageBW);

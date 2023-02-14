@@ -21,6 +21,7 @@ public class Launcher implements ActionListener {
     private String filePath;
     private int currentHeight, pictureWidth, pictureHeight;
     private BufferedImage image;
+    private boolean isImageResized;
 
 
     public Launcher(){
@@ -103,6 +104,7 @@ public class Launcher implements ActionListener {
         frame.revalidate();
 
         filePath = null;
+        isImageResized = false;
 
 
     }
@@ -112,7 +114,10 @@ public class Launcher implements ActionListener {
 
         if(e.getSource() == startButton){
             boolean isSuccess = true;
-            GameLauncher gameLauncher = new GameLauncher(image);
+            if(pictureHeight > 30){
+                isImageResized = true;
+            }
+            GameLauncher gameLauncher = new GameLauncher(image, isImageResized, currentHeight);
             isSuccess = gameLauncher.launchGame();
             if(isSuccess){
                 frame.dispose();
